@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vue-Test List Example</title>
+</head>
+<body>
+
+    <div id="root">
+        <ul>
+            <li v-for="person in people" v-text="person"></li>
+        </ul>
+        <input type="text" id="input" v-model="newPerson" />
+        <button id="button">Add Name</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
+
+    <script>
+
+        var app = new Vue({
+            el: '#root',
+            data: {
+                newPerson: '',
+                people: ['Dan','Fran','Stan','Joel','Charles']
+            },
+            mounted() {
+                document.querySelector('#button').addEventListener('click', () => {
+                    let person = document.querySelector('#input');
+
+                    app.people.push(person.value);
+
+                    person.value = '';
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vue-Test with Attribute Binding</title>
+    <style>
+        .color-red { color:red; }
+        .is-loading { background: #AA0000; }
+    </style>
+</head>
+<body>
+
+    <div id="root">
+        <button v-bind:title="title">Hover Me</button>
+        <button :title="shortHandBoundTitle">Hover Me</button>
+
+        <h1 :class="className">Hello World</h1>
+
+        <h1>Conditionally Set Class</h1>
+        <button @click="buttonClicked" :class="{ 'is-loading': isLoading }" v-bind:disabled="isClicked">Click Me</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
+
+    <script>
+
+        var app = new Vue({
+            el: '#root',
+            data: {
+                title: "You can see the title.",
+                shortHandBoundTitle: "v-bind shorthand",
+                className: 'color-red',
+                isClicked: false,
+                isLoading: false
+            },
+            methods: {
+                buttonClicked() {
+                    this.isClicked = true;
+                    this.isLoading = true;
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

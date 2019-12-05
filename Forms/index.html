@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <title>Vue-Test Clean Forms</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.css" />
+
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root" class="container">
+        <form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
+            <div class="control">
+                <label for="title" class="label">Post Title:</label>
+                <input type="text" id="title" name="title" class="input" v-model="title" />
+                <span class="help is-danger" v-if="errors.has('title')" v-text="errors.get('title')"></span>
+            </div>
+            <div class="control">
+                <label for="body" class="label">Post Content:</label>
+                <input type="text" id="body" name="body" class="input" v-model="body" />
+                <span class="help is-danger"  v-if="errors.has('body')" v-text="errors.get('body')"></span>
+            </div>
+            <div class="control">
+                <button class="button is-primary" :disabled="errors.any">Create</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>

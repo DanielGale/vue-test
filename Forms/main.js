@@ -18,7 +18,12 @@ class Errors {
     }
 
     clear(field) {
-        delete this.errors[field];
+        if (field) {
+            delete this.errors[field];
+        }
+        else {
+            this.errors = {};
+        }
     }
 
     any() {
@@ -26,29 +31,67 @@ class Errors {
     }
 }
 
+class Form {
+
+    constructor(data) {
+
+        this.originalData = data;
+
+        for (let field in data) {
+            this[field] = data[field];
+        }
+
+        this.errors = new Errors();
+
+    }
+
+    data() {
+        let data = Object.assign({}, this);
+
+        delete data.originalData;
+        delete data.errors;
+
+        return data;
+    }
+
+    reset() {
+        for (let field in this.originalData) {
+            this[field] = '';
+        }
+    }
+
+    submit(requestType, url) {
+        axios[requestType](url, this.data())
+            .then(this.onSuccess.bind(this))
+            .catch(this.onFail.bind(this));
+    }
+
+    onSuccess(response) {
+        alert(response.data.id);
+
+        this.errors.clear();
+
+        this.reset();
+    }
+
+    onFail(error) {
+        this.errors.record(error.response.data);
+    }
+}
+
 new Vue({
     el: '#root',
     data: {
-        title: '',
-        body: '',
-        userId: 1,
-        errors: new Errors()
+        form: new Form({
+            title: '',
+            body: '',
+            userId: 1
+        })
     },
     methods: {
         onSubmit() {
+            this.form.submit('post', 'https://jsonplaceholder.typicode.com/posts');
 
-            axios.post('https://jsonplaceholder.typicode.com/posts', this.$data)
-                .then(this.onSuccess)
-                .catch(error => this.errors.record(error.response.data));
-        },
-
-        onSuccess(response) {
-            alert(response.data.message);
-
-
-            //form.reset();
-            this.title = '';
-            this.body = '';
         }
     }
     //mounted() {

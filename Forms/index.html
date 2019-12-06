@@ -19,19 +19,25 @@
 <body>
 
     <div id="root" class="container">
-        <form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
-            <div class="control">
-                <label for="title" class="label">Post Title:</label>
-                <input type="text" id="title" name="title" class="input" v-model="title" />
-                <span class="help is-danger" v-if="errors.has('title')" v-text="errors.get('title')"></span>
+        <form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+            <div class="field">
+                <label class="label" for="title">Post Title</label>
+                <div class="control">
+                    <input class="input" type="text" id="title" name="title" v-model="form.title">
+                </div>
+                <p class="help is-danger" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></p>
             </div>
-            <div class="control">
-                <label for="body" class="label">Post Content:</label>
-                <input type="text" id="body" name="body" class="input" v-model="body" />
-                <span class="help is-danger"  v-if="errors.has('body')" v-text="errors.get('body')"></span>
+            <div class="field">
+                <label class="label" for="title">Post Body</label>
+                <div class="control">
+                    <input class="input" type="text" id="body" name="body" v-model="form.body">
+                </div>
+                <p class="help is-danger" v-if="form.errors.has('body')" v-text="form.errors.get('body')"></p>
             </div>
-            <div class="control">
-                <button class="button is-primary" :disabled="errors.any">Create</button>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" :disabled="form.errors.any()">Create</button>
+                </div>
             </div>
         </form>
     </div>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <title>Vue-Test Built using Webpack</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.css" />
+
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root" class="container">
+        <form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
+            <div class="field">
+                <label class="label" for="title">Post Title</label>
+                <div class="control">
+                    <input class="input" type="text" id="title" name="title" v-model="form.title">
+                </div>
+                <p class="help is-danger" v-if="form.errors.has('title')" v-text="form.errors.get('title')"></p>
+            </div>
+            <div class="field">
+                <label class="label" for="title">Post Body</label>
+                <div class="control">
+                    <input class="input" type="text" id="body" name="body" v-model="form.body">
+                </div>
+                <p class="help is-danger" v-if="form.errors.has('body')" v-text="form.errors.get('body')"></p>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" :disabled="form.errors.any()">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

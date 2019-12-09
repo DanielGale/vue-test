@@ -2,11 +2,16 @@ import Vue from 'vue';
 import axios from 'axios';
 import Form from './core/Form';
 
+import Example from './components/Example';
+
 window.axios = axios;
 window.Form = Form;
 
 new Vue({
     el: '#root',
+    components: {
+      Example  
+    },
     data: {
         form: new Form({
             title: '',
@@ -22,8 +27,4 @@ new Vue({
 
         }
     }
-    //mounted() {
-    //    axios.get('https://jsonplaceholder.typicode.com/posts')
-    //        .then(response => this.posts = response.data);
-    //}
 });

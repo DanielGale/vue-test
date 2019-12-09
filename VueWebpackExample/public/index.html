@@ -19,6 +19,7 @@
 <body>
 
     <div id="root" class="container">
+        <example></example>
         <form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
             <div class="field">
                 <label class="label" for="title">Post Title</label>

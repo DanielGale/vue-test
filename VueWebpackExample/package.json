@@ -4,14 +4,32 @@
   "description": "Vuejs Example with Webpack",
   "main": "public/index.html",
   "scripts": {
-    "webpack": "npx webpack --hide-modules",
-    "dev": "npx webpack --hide-modules --watch"
+    "start": "webpack-dev-server --inline",
+    "dev": "webpack --hide-modules --watch",
+    "prod": "webpack -p --hide-modules"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.19.0",
     "vue": "^2.6.10",
-    "webpack": "^2.2.0-rc.3"
+    "webpack": "^2.2.0-rc.3",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@babel/core": "7.7.5",
+    "babel-loader": "8.0.6",
+    "babel-eslint": "10.0.3",
+    "@babel/preset-env": "7.7.6"
+  },
+  "babel": {
+    "presets": [
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ]
+    ]
   }
 }

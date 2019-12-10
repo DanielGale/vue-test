@@ -5,3 +5,4 @@
 /.vs
 /Vue-Loader/node_modules
 /VueWebpackExample/node_modules
+/VueWebpackExample/dist

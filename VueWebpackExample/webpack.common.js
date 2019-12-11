@@ -3,10 +3,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackPluginCopy = require('webpack-plugin-copy');
 
 module.exports = {
-    entry: './resources/assets/js/app.js',
+    entry: { app: './resources/assets/js/app.js' },
     output: {
         path: path.resolve(__dirname, 'dist/js'),
-        filename: 'app.js',
+        filename: '[name].js',
         publicPath: './dist'
     },
     module: {
@@ -26,6 +26,17 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.common.js'
+        }
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                node_vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: "initial",
+                    name: "vendor"
+                }
+            }
         }
     },
     plugins: [
